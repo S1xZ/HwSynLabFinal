@@ -74,6 +74,7 @@ set_param checkpoint.writeSynthRtdsInDcp 1
 set_param chipscope.maxJobs 3
 set_param synth.incrementalSynthesisCache C:/Users/6/AppData/Roaming/Xilinx/Vivado/.Xil/Vivado-3544-DESKTOP-31QEL6U/incrSyn
 set_param xicom.use_bs_reader 1
+set_msg_config -id {Common 17-41} -limit 10000000
 set_msg_config -id {Synth 8-256} -limit 10000
 set_msg_config -id {Synth 8-638} -limit 10000
 OPTRACE "Creating in-memory project" START { }
@@ -102,6 +103,7 @@ read_verilog -library xil_defaultlib {
   C:/Users/6/workspace/vivado/HwSynLabFinal/FinalProject.srcs/sources_1/new/singlePulser.v
   C:/Users/6/workspace/vivado/HwSynLabFinal/FinalProject.srcs/sources_1/new/uart.v
   C:/Users/6/workspace/vivado/HwSynLabFinal/FinalProject.srcs/sources_1/new/uart_rx.v
+  C:/Users/6/workspace/vivado/HwSynLabFinal/FinalProject.srcs/sources_1/new/uart_tx.v
   C:/Users/6/workspace/vivado/HwSynLabFinal/FinalProject.srcs/sources_1/new/top.v
 }
 OPTRACE "Adding files" END { }
