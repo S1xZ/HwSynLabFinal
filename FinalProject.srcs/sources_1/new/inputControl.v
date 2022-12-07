@@ -33,7 +33,8 @@ module inputControl(
     reg [1:0]state=0;
     reg [15:0]A_reg,B_reg=0;
     reg [1:0]opcode_reg=0;
-    reg executed=0;
+    reg executed,neg=0;
+    reg oped=1;
     always@(posedge clk)begin
         if(reset)begin
             pos<=0;
@@ -44,38 +45,38 @@ module inputControl(
         end
         if(received)begin
         case(data)
-              8'h30: begin A_reg<=0;B_reg<=90;  executed=0; end
-              8'h31: begin A_reg<=10;B_reg<=80;  executed=0; end
-              8'h32: begin A_reg<=200;B_reg<=70;  executed=0; end
-              8'h33: begin A_reg<=300;B_reg<=60;  executed=0; end
-              8'h34: begin A_reg<=4000;B_reg<=50;  executed=0; end
-              8'h35: begin A_reg<=5000;B_reg<=40;  executed=0; end
-              8'h36: begin A_reg<=6000;B_reg<=30;  executed=0; end
-              8'h37: begin A_reg<=7000;B_reg<=20;  executed=0; end
-              8'h38: begin A_reg<=8000;B_reg<=10;  executed=0; end
-              8'h39: begin A_reg<=9000;B_reg<=0;  executed=0; end
-              
-//            //0
-//            8'h30: if(pos==2'b11) begin
-//                pos<=0;
-//                if(state==2'b00)
-//                A_reg<=0;
-//                else if (state==2'b10)
-//                B_reg<=0;
-//            end else
-//                pos <= pos+1;
+//              8'h30: begin A_reg<=0;B_reg<=90;  executed=0; end
+//              8'h31: begin A_reg<=10;B_reg<=80;  executed=0; end
+//              8'h32: begin A_reg<=200;B_reg<=70;  executed=0; end
+//              8'h33: begin A_reg<=300;B_reg<=60;  executed=0; end
+//              8'h34: begin A_reg<=4000;B_reg<=50;  executed=0; end
+//              8'h35: begin A_reg<=5000;B_reg<=40;  executed=0; end
+//              8'h36: begin A_reg<=6000;B_reg<=30;  executed=0; end
+//              8'h37: begin A_reg<=7000;B_reg<=20;  executed=0; end
+//              8'h38: begin A_reg<=8000;B_reg<=10;  executed=0; end
+//              8'h39: begin A_reg<=9000;B_reg<=0;  executed=0; end
+
+            //1
+            8'h31: begin
+                if(state==2'b00&&oped)
+                case(pos)
+                   2'b00: A_reg<=A_reg+1;
+                   2'b01: A_reg<=A_reg+10;
+                   2'b10: A_reg<=A_reg+100;
+                   2'b11: A_reg<=A_reg+1000;
+                endcase
+                else if (state==2'b10&&oped)
+                case(pos)
+                   2'b00: B_reg<=B_reg+1;
+                   2'b01: B_reg<=B_reg+10;
+                   2'b10: B_reg<=B_reg+100;
+                   2'b11: B_reg<=B_reg+1000;
+                endcase
                 
-//            //1
-//            8'h31: if(pos==2'b11) begin
-//                pos<=0;
-//                A_reg<=0;
-//            end else begin
-//                if(state==2'b00)
-//                A_reg <= A_reg+10**pos;
-//                else if (state==2'b10)
-//                B_reg <= B_reg+10**pos;
-//                pos <= pos+1; //NUM
-//            end
+                neg<=0;
+                oped<=0;
+                executed<=0;
+            end
             
 //            //2
 //            8'h32: if(pos==2'b11) begin
@@ -182,6 +183,17 @@ module inputControl(
                 end
             end
             
+            //<
+            8'h3c:begin
+                if(!oped)begin
+                oped<=1;
+                if(pos==2'b11)begin
+                    pos<=0;
+                end
+                else pos<=pos+1;
+                end
+            end
+            
             //+
             8'h2b:begin opcode_reg<=2'b00; executed=0; end
             
@@ -193,6 +205,18 @@ module inputControl(
             
             //"/"
             8'h2f:begin  opcode_reg<=2'b11; executed=0; end
+            
+            //n
+            8'h6e:begin
+            if(state==2'b00&&!neg)begin
+            neg=1;
+            A_reg<=A_reg*-1;
+            end
+            else if(state==2'b11&&neg)begin
+            B_reg<=B_reg*-1;
+            neg=1;
+            end
+            end
             endcase
        end
     end

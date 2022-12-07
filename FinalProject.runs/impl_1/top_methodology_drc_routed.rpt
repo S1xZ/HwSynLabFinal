@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
 -----------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2022.2 (win64) Build 3671981 Fri Oct 14 05:00:03 MDT 2022
-| Date         : Wed Dec  7 13:38:31 2022
+| Date         : Wed Dec  7 15:57:45 2022
 | Host         : LAPTOP-INGD5AP4 running 64-bit major release  (build 9200)
 | Command      : report_methodology -file top_methodology_drc_routed.rpt -pb top_methodology_drc_routed.pb -rpx top_methodology_drc_routed.rpx
 | Design       : top
@@ -23,12 +23,12 @@ Table of Contents
           Floorplan: design_1
       Design limits: <entire design considered>
              Max violations: <unlimited>
-             Violations found: 121
+             Violations found: 124
 +-----------+------------------+--------------------------------+------------+
 | Rule      | Severity         | Description                    | Violations |
 +-----------+------------------+--------------------------------+------------+
 | TIMING-17 | Critical Warning | Non-clocked sequential cell    | 71         |
-| TIMING-16 | Warning          | Large setup violation          | 8          |
+| TIMING-16 | Warning          | Large setup violation          | 11         |
 | TIMING-18 | Warning          | Missing input or output delay  | 23         |
 | TIMING-20 | Warning          | Non-clocked latch              | 18         |
 | LATCH-1   | Advisory         | Existing latches in the design | 1          |
@@ -393,42 +393,57 @@ Related violations: <none>
 
 TIMING-16#1 Warning
 Large setup violation  
-There is a large setup violation of -1.577 ns between inputControl/B_reg_reg[5]_replica/C (clocked by sys_clk_pin) and ALU/ALU_Result_reg[7]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -11.402 ns between inputControl/A_reg_reg[15]/C (clocked by sys_clk_pin) and ALU/ALU_Result_reg[6]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#2 Warning
 Large setup violation  
-There is a large setup violation of -10.003 ns between inputControl/B_reg_reg[5]_replica/C (clocked by sys_clk_pin) and ALU/ALU_Result_reg[2]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -13.394 ns between inputControl/A_reg_reg[15]/C (clocked by sys_clk_pin) and ALU/ALU_Result_reg[5]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#3 Warning
 Large setup violation  
-There is a large setup violation of -11.396 ns between inputControl/B_reg_reg[5]_replica/C (clocked by sys_clk_pin) and ALU/ALU_Result_reg[1]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -15.180 ns between inputControl/A_reg_reg[15]/C (clocked by sys_clk_pin) and ALU/ALU_Result_reg[4]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#4 Warning
 Large setup violation  
-There is a large setup violation of -12.912 ns between inputControl/B_reg_reg[5]_replica/C (clocked by sys_clk_pin) and ALU/ALU_Result_reg[0]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -17.275 ns between inputControl/A_reg_reg[15]/C (clocked by sys_clk_pin) and ALU/ALU_Result_reg[3]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#5 Warning
 Large setup violation  
-There is a large setup violation of -3.337 ns between inputControl/B_reg_reg[5]_replica/C (clocked by sys_clk_pin) and ALU/ALU_Result_reg[6]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -19.360 ns between inputControl/A_reg_reg[15]/C (clocked by sys_clk_pin) and ALU/ALU_Result_reg[2]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#6 Warning
 Large setup violation  
-There is a large setup violation of -5.039 ns between inputControl/B_reg_reg[5]_replica/C (clocked by sys_clk_pin) and ALU/ALU_Result_reg[5]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -21.273 ns between inputControl/A_reg_reg[15]/C (clocked by sys_clk_pin) and ALU/ALU_Result_reg[1]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#7 Warning
 Large setup violation  
-There is a large setup violation of -6.633 ns between inputControl/B_reg_reg[5]_replica/C (clocked by sys_clk_pin) and ALU/ALU_Result_reg[4]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -23.396 ns between inputControl/A_reg_reg[15]/C (clocked by sys_clk_pin) and ALU/ALU_Result_reg[0]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#8 Warning
 Large setup violation  
-There is a large setup violation of -8.177 ns between inputControl/B_reg_reg[5]_replica/C (clocked by sys_clk_pin) and ALU/ALU_Result_reg[3]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -3.002 ns between inputControl/A_reg_reg[15]/C (clocked by sys_clk_pin) and ALU/ALU_Result_reg[10]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#9 Warning
+Large setup violation  
+There is a large setup violation of -5.797 ns between inputControl/A_reg_reg[15]/C (clocked by sys_clk_pin) and ALU/ALU_Result_reg[9]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#10 Warning
+Large setup violation  
+There is a large setup violation of -6.973 ns between inputControl/A_reg_reg[15]/C (clocked by sys_clk_pin) and ALU/ALU_Result_reg[8]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#11 Warning
+Large setup violation  
+There is a large setup violation of -9.395 ns between inputControl/A_reg_reg[15]/C (clocked by sys_clk_pin) and ALU/ALU_Result_reg[7]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-18#1 Warning
