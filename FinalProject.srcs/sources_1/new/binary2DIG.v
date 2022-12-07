@@ -32,10 +32,10 @@ module binary2DIG(
     
     reg [15:0]data;
     
-    always@(A|B|state)begin
+    always@(posedge clk)begin
     case(state)
         2'b00: data<=A;
-        2'b01: data<=16'h8888;
+        2'b01: data<=16'd8888;
         2'b10: data<=B;
         2'b11: data<=data_in;
     endcase

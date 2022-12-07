@@ -42,6 +42,8 @@ module top(
     wire [7:0]data_out;
     
     wire [15:0] A,B,ALU_Out;
+    
+    wire reset;
     ////////////////////////////////////////
     // Clock
     wire targetClk;
