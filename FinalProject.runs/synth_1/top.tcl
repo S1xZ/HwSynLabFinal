@@ -4,7 +4,7 @@
 
 set TIME_start [clock seconds] 
 namespace eval ::optrace {
-  variable script "C:/Users/mario/workspace/vivadoLab/HwSynLabFinal/FinalProject.runs/synth_1/top.tcl"
+  variable script "C:/Users/6/workspace/vivado/HwSynLabFinal/FinalProject.runs/synth_1/top.tcl"
   variable category "vivado_synth"
 }
 
@@ -70,40 +70,44 @@ proc create_report { reportName command } {
   }
 }
 OPTRACE "synth_1" START { ROLLUP_AUTO }
-set_param chipscope.maxJobs 2
+set_param checkpoint.writeSynthRtdsInDcp 1
+set_param chipscope.maxJobs 3
+set_param synth.incrementalSynthesisCache C:/Users/6/AppData/Roaming/Xilinx/Vivado/.Xil/Vivado-14684-DESKTOP-31QEL6U/incrSyn
 set_param xicom.use_bs_reader 1
+set_msg_config -id {Common 17-41} -limit 10000000
+set_msg_config -id {Synth 8-256} -limit 10000
+set_msg_config -id {Synth 8-638} -limit 10000
 OPTRACE "Creating in-memory project" START { }
 create_project -in_memory -part xc7a35tcpg236-1
 
 set_param project.singleFileAddWarning.threshold 0
 set_param project.compositeFile.enableAutoGeneration 0
 set_param synth.vivado.isSynthRun true
-set_property webtalk.parent_dir C:/Users/mario/workspace/vivadoLab/HwSynLabFinal/FinalProject.cache/wt [current_project]
-set_property parent.project_path C:/Users/mario/workspace/vivadoLab/HwSynLabFinal/FinalProject.xpr [current_project]
+set_property webtalk.parent_dir C:/Users/6/workspace/vivado/HwSynLabFinal/FinalProject.cache/wt [current_project]
+set_property parent.project_path C:/Users/6/workspace/vivado/HwSynLabFinal/FinalProject.xpr [current_project]
 set_property default_lib xil_defaultlib [current_project]
 set_property target_language Verilog [current_project]
-set_property ip_output_repo c:/Users/mario/workspace/vivadoLab/HwSynLabFinal/FinalProject.cache/ip [current_project]
+set_property ip_output_repo c:/Users/6/workspace/vivado/HwSynLabFinal/FinalProject.cache/ip [current_project]
 set_property ip_cache_permissions {read write} [current_project]
 OPTRACE "Creating in-memory project" END { }
 OPTRACE "Adding files" START { }
 read_verilog -library xil_defaultlib {
-  C:/Users/mario/workspace/vivadoLab/HwSynLabFinal/FinalProject.srcs/sources_1/new/ALU.v
-  C:/Users/mario/workspace/vivadoLab/HwSynLabFinal/FinalProject.srcs/sources_1/new/baudrate_gen.v
-  C:/Users/mario/workspace/vivadoLab/HwSynLabFinal/FinalProject.srcs/sources_1/new/binary2DIG.v
-  C:/Users/mario/workspace/vivadoLab/HwSynLabFinal/FinalProject.srcs/sources_1/new/clockDiv.v
-  C:/Users/mario/workspace/vivadoLab/HwSynLabFinal/FinalProject.srcs/sources_1/new/clockGenerator.v
-  C:/Users/mario/workspace/vivadoLab/HwSynLabFinal/FinalProject.srcs/sources_1/new/digits_rom.v
-  C:/Users/mario/workspace/vivadoLab/HwSynLabFinal/FinalProject.srcs/sources_1/new/hexTo7Segment.v
-  C:/Users/mario/workspace/vivadoLab/HwSynLabFinal/FinalProject.srcs/sources_1/new/inputControl.v
-  C:/Users/mario/workspace/vivadoLab/HwSynLabFinal/FinalProject.srcs/sources_1/new/numberCounter.v
-  C:/Users/mario/workspace/vivadoLab/HwSynLabFinal/FinalProject.srcs/sources_1/new/quadSevenSeg.v
-  C:/Users/mario/workspace/vivadoLab/HwSynLabFinal/FinalProject.srcs/sources_1/new/singlePulser.v
-  C:/Users/mario/workspace/vivadoLab/HwSynLabFinal/FinalProject.srcs/sources_1/new/uart.v
-  C:/Users/mario/workspace/vivadoLab/HwSynLabFinal/FinalProject.srcs/sources_1/new/uart_rx.v
-  C:/Users/mario/workspace/vivadoLab/HwSynLabFinal/FinalProject.srcs/sources_1/new/uart_tx.v
-  C:/Users/mario/workspace/vivadoLab/HwSynLabFinal/FinalProject.srcs/sources_1/new/vga_control.v
-  C:/Users/mario/workspace/vivadoLab/HwSynLabFinal/FinalProject.srcs/sources_1/imports/sources_1/vga_sync.v
-  C:/Users/mario/workspace/vivadoLab/HwSynLabFinal/FinalProject.srcs/sources_1/new/top.v
+  C:/Users/6/workspace/vivado/HwSynLabFinal/FinalProject.srcs/sources_1/new/ALU.v
+  C:/Users/6/workspace/vivado/HwSynLabFinal/FinalProject.srcs/sources_1/new/baudrate_gen.v
+  C:/Users/6/workspace/vivado/HwSynLabFinal/FinalProject.srcs/sources_1/new/binary2DIG.v
+  C:/Users/6/workspace/vivado/HwSynLabFinal/FinalProject.srcs/sources_1/new/clockDiv.v
+  C:/Users/6/workspace/vivado/HwSynLabFinal/FinalProject.srcs/sources_1/new/clockGenerator.v
+  C:/Users/6/workspace/vivado/HwSynLabFinal/FinalProject.srcs/sources_1/new/digits_rom.v
+  C:/Users/6/workspace/vivado/HwSynLabFinal/FinalProject.srcs/sources_1/new/hexTo7Segment.v
+  C:/Users/6/workspace/vivado/HwSynLabFinal/FinalProject.srcs/sources_1/new/inputControl.v
+  C:/Users/6/workspace/vivado/HwSynLabFinal/FinalProject.srcs/sources_1/new/numberCounter.v
+  C:/Users/6/workspace/vivado/HwSynLabFinal/FinalProject.srcs/sources_1/new/quadSevenSeg.v
+  C:/Users/6/workspace/vivado/HwSynLabFinal/FinalProject.srcs/sources_1/new/singlePulser.v
+  C:/Users/6/workspace/vivado/HwSynLabFinal/FinalProject.srcs/sources_1/new/uart.v
+  C:/Users/6/workspace/vivado/HwSynLabFinal/FinalProject.srcs/sources_1/new/uart_rx.v
+  C:/Users/6/workspace/vivado/HwSynLabFinal/FinalProject.srcs/sources_1/new/vga_control.v
+  C:/Users/6/workspace/vivado/HwSynLabFinal/FinalProject.srcs/sources_1/imports/sources_1/vga_sync.v
+  C:/Users/6/workspace/vivado/HwSynLabFinal/FinalProject.srcs/sources_1/new/top.v
 }
 OPTRACE "Adding files" END { }
 # Mark all dcp files as not used in implementation to prevent them from being
@@ -114,12 +118,12 @@ OPTRACE "Adding files" END { }
 foreach dcp [get_files -quiet -all -filter file_type=="Design\ Checkpoint"] {
   set_property used_in_implementation false $dcp
 }
-read_xdc C:/Users/mario/workspace/vivadoLab/HwSynLabFinal/FinalProject.srcs/constrs_1/new/Basys-3-Master.xdc
-set_property used_in_implementation false [get_files C:/Users/mario/workspace/vivadoLab/HwSynLabFinal/FinalProject.srcs/constrs_1/new/Basys-3-Master.xdc]
+read_xdc C:/Users/6/workspace/vivado/HwSynLabFinal/FinalProject.srcs/constrs_1/new/Basys-3-Master.xdc
+set_property used_in_implementation false [get_files C:/Users/6/workspace/vivado/HwSynLabFinal/FinalProject.srcs/constrs_1/new/Basys-3-Master.xdc]
 
 set_param ips.enableIPCacheLiteLoad 1
 
-read_checkpoint -auto_incremental -incremental C:/Users/mario/workspace/vivadoLab/HwSynLabFinal/FinalProject.srcs/utils_1/imports/synth_1/vga_control.dcp
+read_checkpoint -auto_incremental -incremental C:/Users/6/workspace/vivado/HwSynLabFinal/FinalProject.srcs/utils_1/imports/synth_1/vga_control.dcp
 close [open __synthesis_is_running__ w]
 
 OPTRACE "synth_design" START { }

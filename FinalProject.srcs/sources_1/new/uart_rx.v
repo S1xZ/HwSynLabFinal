@@ -51,7 +51,7 @@ module uart_rx(
             8'd104: data_out[5] <= bit_in;
             8'd120: data_out[6] <= bit_in;
             8'd136: data_out[7] <= bit_in;
-            8'd152: begin received <= 1; receiving <= 0; end
+            8'd1000: begin received <= 1; receiving <= 0; end
         endcase
     end
 endmodule

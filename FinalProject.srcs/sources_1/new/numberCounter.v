@@ -22,7 +22,7 @@
 
 module numberCounter(input clk,input [15:0]data,output[3:0]D3,D2,D1,D0);
 
-reg [15:0] counter,prevData=0;
+reg [15:0] counter,prevData;
 reg [3:0] ones,tens,hundreds,thousands;
 reg start=0;
 
@@ -35,7 +35,7 @@ always@(posedge clk) begin
         thousands <= 0;
         start<=1;
     end
-    else if(counter==data) begin
+    else if(counter==data||counter==-data) begin
         prevData<=data;
         start<=0;
     end

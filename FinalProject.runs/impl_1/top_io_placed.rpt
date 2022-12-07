@@ -1,8 +1,8 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------
 | Tool Version              : Vivado v.2022.2 (win64) Build 3671981 Fri Oct 14 05:00:03 MDT 2022
-| Date                      : Wed Dec  7 15:57:06 2022
-| Host                      : LAPTOP-INGD5AP4 running 64-bit major release  (build 9200)
+| Date                      : Wed Dec  7 19:35:19 2022
+| Host                      : DESKTOP-31QEL6U running 64-bit major release  (build 9200)
 | Command                   : report_io -file top_io_placed.rpt
 | Design                    : top
 | Device                    : xc7a35t
@@ -25,7 +25,7 @@ Table of Contents
 +---------------+
 | Total User IO |
 +---------------+
-|            32 |
+|            31 |
 +---------------+
 
 
@@ -52,7 +52,7 @@ Table of Contents
 | A15        |             | High Range | IO_L6N_T0_VREF_16            | User IO       |             |      16 |            |      |                     |                      |         |            |           |          |      |                  |              |                   |              |
 | A16        |             | High Range | IO_L12P_T1_MRCC_16           | User IO       |             |      16 |            |      |                     |                      |         |            |           |          |      |                  |              |                   |              |
 | A17        |             | High Range | IO_L12N_T1_MRCC_16           | User IO       |             |      16 |            |      |                     |                      |         |            |           |          |      |                  |              |                   |              |
-| A18        | RsTx        | High Range | IO_L19N_T3_VREF_16           | OUTPUT        | LVCMOS33    |      16 |         12 | SLOW |                     |            FP_VTT_50 |         | FIXED      |           |          |      | NONE             |              |                   |              |
+| A18        |             | High Range | IO_L19N_T3_VREF_16           | User IO       |             |      16 |            |      |                     |                      |         |            |           |          |      |                  |              |                   |              |
 | A19        |             |            | GND                          | GND           |             |         |            |      |                     |                      |     0.0 |            |           |          |      |                  |              |                   |              |
 | B1         |             |            | MGTAVTT                      | Gigabit Power |             |         |            |      |                     |                      |         |            |           |          |      |                  |              |                   |              |
 | B2         |             |            | MGTPTXP1_216                 | Gigabit       |             |         |            |      |                     |                      |         |            |           |          |      |                  |              |                   |              |

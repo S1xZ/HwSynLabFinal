@@ -22,28 +22,17 @@
 
 module inputControl(
     input [7:0] data,
-    input received,reset,clk,
+    input received,reset,
     output [15:0] A,B,
     output [1:0] opcode,
-    output [1:0] state,
-    output en
+    output [1:0] state
     );
     
-    reg [1:0]pos=0;
     reg [1:0]state=0;
     reg [15:0]A_reg,B_reg=0;
     reg [1:0]opcode_reg=0;
-    reg executed,neg=0;
-    reg oped=1;
-    always@(posedge clk)begin
-        if(reset)begin
-            pos<=0;
-            state<=0;
-            A_reg<=0;
-            B_reg<=0;
-            opcode_reg<=0;
-        end
-        if(received)begin
+    
+    always@(posedge received)begin
         case(data)
 //              8'h30: begin A_reg<=0;B_reg<=90;  executed=0; end
 //              8'h31: begin A_reg<=10;B_reg<=80;  executed=0; end
@@ -57,171 +46,52 @@ module inputControl(
 //              8'h39: begin A_reg<=9000;B_reg<=0;  executed=0; end
 
             //1
-            8'h31: begin
-                if(state==2'b00&&oped)
-                case(pos)
-                   2'b00: A_reg<=A_reg+1;
-                   2'b01: A_reg<=A_reg+10;
-                   2'b10: A_reg<=A_reg+100;
-                   2'b11: A_reg<=A_reg+1000;
-                endcase
-                else if (state==2'b10&&oped)
-                case(pos)
-                   2'b00: B_reg<=B_reg+1;
-                   2'b01: B_reg<=B_reg+10;
-                   2'b10: B_reg<=B_reg+100;
-                   2'b11: B_reg<=B_reg+1000;
-                endcase
-                
-                neg<=0;
-                oped<=0;
-                executed<=0;
-            end
+            8'h31: 
+            if(state==2'b00) A_reg<=A_reg+1;
+            else if (state==2'b10) B_reg<=B_reg+1;
             
-//            //2
-//            8'h32: if(pos==2'b11) begin
-//                pos<=0;
-//                A_reg<=0;
-//            end else begin
-//                if(state==2'b00)
-//                A_reg <= A_reg+2*(10**pos);
-//                else if (state==2'b10)
-//                B_reg <= B_reg+2*(10**pos);
-//                pos <= pos+1; //NUM
-//            end
+            //2
+            8'h32: 
+            if(state==2'b00) A_reg<=A_reg+10;
+            else if (state==2'b10) B_reg<=B_reg+10;
             
-//            //3
-//            8'h33: if(pos==2'b11) begin
-//                pos<=0;
-//                A_reg<=0;
-//            end else begin
-//                if(state==2'b00)
-//                A_reg <= A_reg+3*(10**pos);
-//                else if (state==2'b10)
-//                B_reg <= B_reg+3*(10**pos);
-//                pos <= pos+1; //NUM
-//            end
+            //3
+            8'h33:
+            if(state==2'b00) A_reg<=A_reg+100;
+            else if (state==2'b10) B_reg<=B_reg+100;
             
-//            //4
-//            8'h34: if(pos==2'b11) begin
-//                pos<=0;
-//                A_reg<=0;
-//            end else begin
-//                if(state==2'b00)
-//                A_reg <= A_reg+4*(10**pos);
-//                else if (state==2'b10)
-//                B_reg <= B_reg+4*(10**pos);
-//                pos <= pos+1; //NUM
-//            end
-            
-//            //5
-//            8'h35: if(pos==2'b11) begin
-//                pos<=0;
-//                A_reg<=0;
-//            end else begin
-//                if(state==2'b00)
-//                A_reg <= A_reg+5*(10**pos);
-//                else if (state==2'b10)
-//                B_reg <= B_reg+5*(10**pos);
-//                pos <= pos+1; //NUM
-//            end
-            
-//            //6
-//            8'h36: if(pos==2'b11) begin
-//                pos<=0;
-//                A_reg<=0;
-//            end else begin
-//                if(state==2'b00)
-//                A_reg <= A_reg+6*(10**pos);
-//                else if (state==2'b10)
-//                B_reg <= B_reg+6*(10**pos);
-//                pos <= pos+1; //NUM
-//            end
-            
-//            //7
-//            8'h37: if(pos==2'b11) begin
-//                pos<=0;
-//                A_reg<=0;
-//            end else begin
-//                if(state==2'b00)
-//                A_reg <= A_reg+7*(10**pos);
-//                else if (state==2'b10)
-//                B_reg <= B_reg+7*(10**pos);
-//                pos <= pos+1; //NUM
-//            end
-            
-//            //8
-//            8'h38: if(pos==2'b11) begin
-//                pos<=0;
-//                A_reg<=0;
-//            end else begin
-//                if(state==2'b00)
-//                A_reg <= A_reg+8*(10**pos);
-//                else if (state==2'b10)
-//                B_reg <= B_reg+8*(10**pos);
-//                pos <= pos+1; //NUM
-//            end
-            
-//            //9
-//            8'h39: if(pos==2'b11) begin
-//                pos<=0;
-//                A_reg<=0;
-//            end else begin
-//                if(state==2'b00)
-//                A_reg <= A_reg+9*(10**pos);
-//                else if (state==2'b10)
-//                B_reg <= B_reg+9*(10**pos);
-//                pos <= pos+1; //NUM
-//            end
+            //4
+            8'h34:
+            if(state==2'b00) A_reg<=A_reg+1000;
+            else if (state==2'b10) B_reg<=B_reg+1000;
             
             //SPACE
-            8'h20:begin
-                if(!executed)begin
-                executed=1;
-                if(state!=2'b11)
-                    state<=state+1;
-                end
-            end
+            8'h20:
+            if(state!=2'b11) state<=state+1;
             
-            //<
-            8'h3c:begin
-                if(!oped)begin
-                oped<=1;
-                if(pos==2'b11)begin
-                    pos<=0;
-                end
-                else pos<=pos+1;
-                end
-            end
             
             //+
-            8'h2b:begin opcode_reg<=2'b00; executed=0; end
+            8'h2b:if(state==2'b01) opcode_reg<=2'b00;
             
             //-
-            8'h2d:begin  opcode_reg<=2'b01; executed=0; end
+            8'h2d:if(state==2'b01) opcode_reg<=2'b01; 
             
             //*
-            8'h2a:begin  opcode_reg<=2'b10; executed=0; end
+            8'h2a:if(state==2'b01) opcode_reg<=2'b10;
             
             //"/"
-            8'h2f:begin  opcode_reg<=2'b11; executed=0; end
+            8'h2f:if(state==2'b01) opcode_reg<=2'b11;
             
             //n
-            8'h6e:begin
-            if(state==2'b00&&!neg)begin
-            neg=1;
+            8'h6e:
+            if(state==2'b00)
             A_reg<=A_reg*-1;
-            end
-            else if(state==2'b11&&neg)begin
+            else if(state==2'b10)
             B_reg<=B_reg*-1;
-            neg=1;
-            end
-            end
+            
             endcase
-       end
     end
     
-    assign en = 1;
     assign A = A_reg;
     assign B = B_reg;
     assign opcode = opcode_reg;

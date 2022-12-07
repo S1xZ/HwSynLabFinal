@@ -25,7 +25,6 @@ module top(
     output dp,
     output [3:0] an,
     output [1:0] led,
-    output wire RsTx,
     output wire Hsync, Vsync, //vga
     output wire [3:0] vgaRed, vgaGreen, vgaBlue, //vga
     input clk,
@@ -38,7 +37,7 @@ module top(
     wire [1:0]opcode;
     wire [1:0]state;
     
-    wire an0,an1,an2,an3,received,en,CarryOut;
+    wire an0,an1,an2,an3,received,div0;
     assign an={an3,an2,an1,an0};
     
     wire [7:0]data_out;
@@ -58,7 +57,7 @@ module top(
     
     ////////////////////////////////////////
     // UART
-    uart uart(clk,RsRx,data_out,received,RsTx);
+    uart uart(clk,RsRx,data_out,received);
     
     ////////////////////////////////////////
     // Single Pulser
@@ -66,15 +65,15 @@ module top(
     
     ////////////////////////////////////////
     // Input Control
-    inputControl inputControl(data_out,received,reset,clk,A,B,opcode,state,en);
+    inputControl inputControl(data_out,received,reset,A,B,opcode,state);
     
     ////////////////////////////////////////
     // ALU
-    ALU ALU(A,B,opcode,en,clk,ALU_Out,CarryOut);
+    ALU ALU(A,B,opcode,clk,ALU_Out,div0);
     
     ////////////////////////////////////////
     // binary2DIG
-    binary2DIG binary2DIG(A,B,ALU_Out,state,CarryOut,clk,num3,num2,num1,num0,led[0],led[1]);
+    binary2DIG binary2DIG(A,B,ALU_Out,state,clk,div0,num3,num2,num1,num0,led[0],led[1]);
     
     ////////////////////////////////////////
     // vga
