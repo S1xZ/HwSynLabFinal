@@ -25,7 +25,7 @@ module inputControl(
     input received,reset,
     output [15:0] A,B,
     output [1:0] opcode,
-    output [1:0] state
+    output [1:0] st
     );
     
     reg [1:0]state=0;
@@ -71,16 +71,16 @@ module inputControl(
             
             
             //+
-            8'h2b:if(state==2'b01) opcode_reg<=2'b00;
+            8'h2b: if(state==2'b01) opcode_reg<=2'b00;
             
             //-
-            8'h2d:if(state==2'b01) opcode_reg<=2'b01; 
+            8'h2d: if(state==2'b01) opcode_reg<=2'b01; 
             
             //*
-            8'h2a:if(state==2'b01) opcode_reg<=2'b10;
+            8'h2a: if(state==2'b01) opcode_reg<=2'b10;
             
             //"/"
-            8'h2f:if(state==2'b01) opcode_reg<=2'b11;
+            8'h2f: if(state==2'b01) opcode_reg<=2'b11;
             
             //n
             8'h6e:
@@ -95,5 +95,6 @@ module inputControl(
     assign A = A_reg;
     assign B = B_reg;
     assign opcode = opcode_reg;
+    assign st = state;
     
 endmodule

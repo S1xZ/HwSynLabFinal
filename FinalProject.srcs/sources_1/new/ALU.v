@@ -29,9 +29,9 @@ module ALU(
     );
     
     reg [15:0] ALU_Result=0;
-    wire [16:0] tmp;
     assign ALU_Out = ALU_Result; // ALU out
     assign div0=(B==0&&ALU_Sel==2'b11);
+    
     always @(posedge clk)
     begin
         case(ALU_Sel)
@@ -43,7 +43,7 @@ module ALU(
            ALU_Result <= A * B;
         2'b11: // Division
            ALU_Result <= A/B;
-          default: ALU_Result = A + B ; 
+          default: ALU_Result = 16'sd9999 ; 
         endcase
     end
 

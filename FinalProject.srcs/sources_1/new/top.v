@@ -79,7 +79,7 @@ module top(
     // vga
     vga_control vga_control(clk,video_on,x, y,
                 num3,num2,num1,num0,
-                NEG,isNan,
+                led[0],led[1],
                 {vgaRed, vgaGreen, vgaBlue}
     );
     

@@ -21,7 +21,7 @@
 
 
 module binary2DIG(
-    input [15:0] A,B,data_in,
+    input signed [15:0] A,B,data_in,
     input [1:0]state,
     input clk,div0,
     output [3:0]D3,D2,D1,D0,
@@ -29,7 +29,7 @@ module binary2DIG(
     output isNan
     );
     
-    reg [15:0]data;
+    reg signed [15:0]data;
     reg Nan;
     always@(A|B|state)begin
     case(state)
@@ -42,13 +42,12 @@ module binary2DIG(
     
     numberCounter numberCounter(clk,data,D3,D2,D1,D0);
     
-    assign NEG = (state==2'b00&&A < 0)||(state==2'b10&&B<0)||(state==2'b11&&data_in<0);
-    assign isNan = 
-    (A>15'd9999&&state==2'b00)||
-    (B>15'd9999&&state==2'b10)||
-    (data_in>15'd9999&&state==2'b11)||
-    (A<-15'd9999&&state==2'b00)||
-    (B<-15'd9999&&state==2'b10)||
-    (data_in<-15'd9999&&state==2'b11)||
-    div0;
+    assign NEG = (A[15]==1&&state==2'b00)||
+    (B[15]==1&&state==2'b10)||
+    (data_in[15]==1&&state==2'b11);
+    
+    assign isNan = (A > 16'sd9999 && state==2'b00)||(A < -16'sd9999 && state==2'b00)||
+    (B > 16'sd9999 && state==2'b10)||(B < -16'sd9999 && state==2'b10)||
+    (data_in > 16'sd9999 && state==2'b11)||(data_in < -16'sd9999 && state==2'b11)||
+    (div0&&state==2'b11);
 endmodule
