@@ -26,6 +26,8 @@ module top(
     output [3:0] an,
     output [1:0] led,
     output wire RsTx,
+    output wire Hsync, Vsync, //vga
+    output wire [3:0] vgaRed, vgaGreen, vgaBlue, //vga
     input clk,
     input wire RsRx,
     input btnC
@@ -73,5 +75,18 @@ module top(
     ////////////////////////////////////////
     // binary2DIG
     binary2DIG binary2DIG(A,B,ALU_Out,state,CarryOut,clk,num3,num2,num1,num0,led[0],led[1]);
+    
+    ////////////////////////////////////////
+    // vga
+    vga_control vga_control(clk,video_on,x, y,
+                num3,num2,num1,num0,
+                NEG,isNan,
+                {vgaRed, vgaGreen, vgaBlue}
+    );
+    
+    wire video_on,p_tick;
+    wire [9:0] x, y;
+    
+    vga_sync vga_sync(clk, reset,Hsync, Vsync, video_on, p_tick,x, y);
 
 endmodule
