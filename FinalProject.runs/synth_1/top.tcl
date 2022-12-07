@@ -70,13 +70,9 @@ proc create_report { reportName command } {
   }
 }
 OPTRACE "synth_1" START { ROLLUP_AUTO }
-set_param checkpoint.writeSynthRtdsInDcp 1
 set_param chipscope.maxJobs 3
-set_param synth.incrementalSynthesisCache C:/Users/6/AppData/Roaming/Xilinx/Vivado/.Xil/Vivado-3544-DESKTOP-31QEL6U/incrSyn
 set_param xicom.use_bs_reader 1
 set_msg_config -id {Common 17-41} -limit 10000000
-set_msg_config -id {Synth 8-256} -limit 10000
-set_msg_config -id {Synth 8-638} -limit 10000
 OPTRACE "Creating in-memory project" START { }
 create_project -in_memory -part xc7a35tcpg236-1
 
@@ -99,6 +95,7 @@ read_verilog -library xil_defaultlib {
   C:/Users/6/workspace/vivado/HwSynLabFinal/FinalProject.srcs/sources_1/new/clockGenerator.v
   C:/Users/6/workspace/vivado/HwSynLabFinal/FinalProject.srcs/sources_1/new/hexTo7Segment.v
   C:/Users/6/workspace/vivado/HwSynLabFinal/FinalProject.srcs/sources_1/new/inputControl.v
+  C:/Users/6/workspace/vivado/HwSynLabFinal/FinalProject.srcs/sources_1/new/numberCounter.v
   C:/Users/6/workspace/vivado/HwSynLabFinal/FinalProject.srcs/sources_1/new/quadSevenSeg.v
   C:/Users/6/workspace/vivado/HwSynLabFinal/FinalProject.srcs/sources_1/new/singlePulser.v
   C:/Users/6/workspace/vivado/HwSynLabFinal/FinalProject.srcs/sources_1/new/uart.v

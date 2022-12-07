@@ -46,14 +46,14 @@ module inputControl(
         case(data)
               8'h30: begin A_reg<=0;B_reg<=90; end
               8'h31: begin A_reg<=10;B_reg<=80; end
-              8'h32: begin A_reg<=20;B_reg<=70; end
-              8'h33: begin A_reg<=30;B_reg<=60; end
-              8'h34: begin A_reg<=40;B_reg<=50; end
-              8'h35: begin A_reg<=50;B_reg<=40; end
-              8'h36: begin A_reg<=60;B_reg<=30; end
-              8'h37: begin A_reg<=70;B_reg<=20; end
-              8'h38: begin A_reg<=80;B_reg<=10; end
-              8'h39: begin A_reg<=90;B_reg<=0; end
+              8'h32: begin A_reg<=200;B_reg<=70; end
+              8'h33: begin A_reg<=300;B_reg<=60; end
+              8'h34: begin A_reg<=4000;B_reg<=50; end
+              8'h35: begin A_reg<=5000;B_reg<=40; end
+              8'h36: begin A_reg<=6000;B_reg<=30; end
+              8'h37: begin A_reg<=7000;B_reg<=20; end
+              8'h38: begin A_reg<=8000;B_reg<=10; end
+              8'h39: begin A_reg<=9000;B_reg<=0; end
               
 //            //0
 //            8'h30: if(pos==2'b11) begin
@@ -174,19 +174,19 @@ module inputControl(
 //            end
             
             //RETURN
-            8'h0a: if(state!=2'b11)state<=state+1;
+//            8'h0a: if(state!=2'b11)state<=state+1;
             
             //+
-            8'h2b: if(state==2'b01) opcode_reg<=2'b00;
+            8'h2b: opcode_reg<=2'b00;
             
             //-
-            8'h2d: if(state==2'b01) opcode_reg<=2'b01;
+            8'h2d: opcode_reg<=2'b01;
             
             //*
-            8'h2a: if(state==2'b01) opcode_reg<=2'b10;
+            8'h2a: opcode_reg<=2'b10;
             
             //"/"
-            8'h2f: if(state==2'b01) opcode_reg<=2'b11;
+            8'h2f: opcode_reg<=2'b11;
             endcase
        end
     end

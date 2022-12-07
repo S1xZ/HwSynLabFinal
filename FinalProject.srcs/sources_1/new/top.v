@@ -58,7 +58,7 @@ module top(
     
     ////////////////////////////////////////
     // Single Pulser
-    singlePulser singlePulser(reset,btnC,clk);
+    singlePulser singlePulser(reset,btnC,targetClk);
     
     ////////////////////////////////////////
     // Input Control
@@ -70,6 +70,6 @@ module top(
     
     ////////////////////////////////////////
     // binary2DIG
-    binary2DIG binary2DIG(A,B,ALU_Out,state,CarryOut,num3,num2,num1,num0,led[0],led[1]);
+    binary2DIG binary2DIG(A,B,ALU_Out,state,CarryOut,clk,num3,num2,num1,num0,led[0],led[1]);
 
 endmodule
