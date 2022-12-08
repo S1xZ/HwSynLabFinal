@@ -12,7 +12,8 @@ module vga_control(
     input [9:0] x, y,
     input [3:0] D3,D2,D1,D0,
     input NEG,isNan,
-    output reg [11:0] time_rgb
+    input [11:0]current_rgb,
+    output reg [11:0] rgb
     );
   
     // *** Constant Declarations ***
@@ -107,62 +108,62 @@ module vga_control(
         
     // Mux for ROM Addresses and RGB    
     always @* begin
-        time_rgb = 12'h222;             // black background
+        rgb = 12'h222;             // black background
         if(D0_on&&!isNan) begin
             char_addr = char_addr_D0;
             row_addr = row_addr_D0;
             bit_addr = bit_addr_D0;
             if(digit_bit)
-                time_rgb = 12'hEEE;     // white
+                rgb = current_rgb;     // cycle rgb
         end
         else if (D0_on&isNan) begin
             char_addr = 7'h3c;
             row_addr = row_addr_D0;
             bit_addr = bit_addr_D0;
             if(digit_bit)
-                time_rgb = 12'hEEE;     // white
+                rgb = current_rgb;     // cycle rgb
         end
         else if(D1_on&&!isNan) begin
             char_addr = char_addr_D1;
             row_addr = row_addr_D1;
             bit_addr = bit_addr_D1;
             if(digit_bit)
-                time_rgb = 12'hEEE;     // white
+                rgb = current_rgb;     // cycle rgb
         end
         else if(D1_on&&isNan) begin
             char_addr = 7'h3b;
             row_addr = row_addr_D1;
             bit_addr = bit_addr_D1;
             if(digit_bit)
-                time_rgb = 12'hEEE;     // white
+                rgb = current_rgb;     // cycle rgb
         end
         else if(D2_on&&!isNan) begin
             char_addr = char_addr_D2;
             row_addr = row_addr_D2;
             bit_addr = bit_addr_D2;
             if(digit_bit)
-                time_rgb = 12'hEEE;     // white
+                rgb = current_rgb;     // cycle rgb
         end
         else if(D2_on&&isNan) begin
             char_addr = 7'h3c;
             row_addr = row_addr_D2;
             bit_addr = bit_addr_D2;
             if(digit_bit)
-                time_rgb = 12'hEEE;     // white
+                rgb = current_rgb;     // cycle rgb
         end
         else if(D3_on&&!isNan) begin
             char_addr = char_addr_D3;
             row_addr = row_addr_D3;
             bit_addr = bit_addr_D3;
             if(digit_bit)
-                time_rgb = 12'hEEE;     // white
+                rgb = current_rgb;     // cycle rgb
         end
         else if(N_on&&!isNan) begin
             char_addr = char_addr_N;
             row_addr = row_addr_N;
             bit_addr = bit_addr_N;
             if(digit_bit)
-                time_rgb = 12'hEEE;     // white
+                rgb = current_rgb;     // cycle rgb
         end
         
         

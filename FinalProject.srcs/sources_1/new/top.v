@@ -76,10 +76,15 @@ module top(
     binary2DIG binary2DIG(A,B,ALU_Out,state,clk,div0,num3,num2,num1,num0,led[0],led[1]);
     
     ////////////////////////////////////////
+    // rgbCycle module
+    wire [11:0]rgb_cycle;
+    rgbColorModule(targetClk,rgb_cycle);
+    
+    ////////////////////////////////////////
     // vga
     vga_control vga_control(clk,video_on,x, y,
                 num3,num2,num1,num0,
-                led[0],led[1],
+                led[0],led[1],rgb_cycle,
                 {vgaRed, vgaGreen, vgaBlue}
     );
     
