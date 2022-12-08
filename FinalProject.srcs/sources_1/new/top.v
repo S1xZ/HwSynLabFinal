@@ -65,7 +65,7 @@ module top(
     
     ////////////////////////////////////////
     // Input Control
-    inputControl inputControl(data_out,received,reset,A,B,opcode,state);
+    inputControl inputControl(data_out,received,reset,clk,A,B,opcode,state);
     
     ////////////////////////////////////////
     // ALU

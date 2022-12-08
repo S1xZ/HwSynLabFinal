@@ -22,17 +22,32 @@
 
 module inputControl(
     input [7:0] data,
-    input received,reset,
+    input received,reset,clk,
     output [15:0] A,B,
     output [1:0] opcode,
     output [1:0] st
     );
     
     reg [1:0]state=0;
+    reg [2:0] rcd;  
+    reg [2:0] rsd;
     reg [15:0]A_reg,B_reg=0;
     reg [1:0]opcode_reg=0;
     
-    always@(posedge received)begin
+    always @(posedge clk) begin
+    rcd <= {rcd[1:0], received};
+    rsd <= {rsd[1:0], reset};
+    end
+    
+    always@(posedge clk)begin
+        if(rsd[1] & ~rsd[2]) begin//Rise edge of reset
+        state<=0;
+        A_reg<=0;
+        B_reg<=0;
+        opcode_reg<=0;
+        end
+        
+        if(rcd[1] & ~rcd[2]) begin //Rise edge of received
         case(data)
 //              8'h30: begin A_reg<=0;B_reg<=90;  executed=0; end
 //              8'h31: begin A_reg<=10;B_reg<=80;  executed=0; end
@@ -47,23 +62,23 @@ module inputControl(
 
             //1
             8'h31: 
-            if(state==2'b00) A_reg<=A_reg+1;
-            else if (state==2'b10) B_reg<=B_reg+1;
+            if(state==2'b00&&A_reg+1<=9999) A_reg<=A_reg+1;
+            else if (state==2'b10&&B_reg+1<=9999) B_reg<=B_reg+1;
             
             //2
             8'h32: 
-            if(state==2'b00) A_reg<=A_reg+10;
-            else if (state==2'b10) B_reg<=B_reg+10;
+            if(state==2'b00&&A_reg+10<=9999) A_reg<=A_reg+10;
+            else if (state==2'b10&&B_reg+10<=9999) B_reg<=B_reg+10;
             
             //3
             8'h33:
-            if(state==2'b00) A_reg<=A_reg+100;
-            else if (state==2'b10) B_reg<=B_reg+100;
+            if(state==2'b00&&A_reg+100<=9999) A_reg<=A_reg+100;
+            else if (state==2'b10&&B_reg+100<=9999) B_reg<=B_reg+100;
             
             //4
             8'h34:
-            if(state==2'b00) A_reg<=A_reg+1000;
-            else if (state==2'b10) B_reg<=B_reg+1000;
+            if(state==2'b00&&A_reg+1000<=9999) A_reg<=A_reg+1000;
+            else if (state==2'b10&&B_reg+1000<=9999) B_reg<=B_reg+1000;
             
             //SPACE
             8'h20:
@@ -90,6 +105,7 @@ module inputControl(
             B_reg<=B_reg*-1;
             
             endcase
+            end
     end
     
     assign A = A_reg;

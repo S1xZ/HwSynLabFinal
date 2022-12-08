@@ -10,7 +10,7 @@ module vga_control(
     input clk,
     input video_on,
     input [9:0] x, y,
-    input [3:0] D0,D1,D2,D3,
+    input [3:0] D3,D2,D1,D0,
     input NEG,isNan,
     output reg [11:0] time_rgb
     );
@@ -18,35 +18,35 @@ module vga_control(
     // *** Constant Declarations ***
     //DIGIT0=RIGHTMOSTDIGIT
     
-    // DIGIT0 Digit section = 32 x 64
-    localparam D0_X_L = 192;
-    localparam D0_X_R = 223;
-    localparam D0_Y_T = 192;
-    localparam D0_Y_B = 256;
+    // DIGIT0 Digit section = 64 x 128
+    localparam N_X_L = 160;
+    localparam N_X_R = 223;
+    localparam N_Y_T = 176;
+    localparam N_Y_B = 303;
     
-    // DIGIT1 Digit section = 32 x 64
-    localparam D1_X_L = 224;
-    localparam D1_X_R = 255;
-    localparam D1_Y_T = 192;
-    localparam D1_Y_B = 256;
+    // DIGIT1 Digit section = 64 x 128
+    localparam D3_X_L = 224;
+    localparam D3_X_R = 287;
+    localparam D3_Y_T = 176;
+    localparam D3_Y_B = 303;
     
-    // DIGIT2 Digit section = 32 x 64
-    localparam D2_X_L = 256;
-    localparam D2_X_R = 287;
-    localparam D2_Y_T = 192;
-    localparam D2_Y_B = 256;
+    // DIGIT2 Digit section = 64 x 128
+    localparam D2_X_L = 288;
+    localparam D2_X_R = 351;
+    localparam D2_Y_T = 176;
+    localparam D2_Y_B = 303;
     
-    // DIGIT3 Digit section = 32 x 64
-    localparam D3_X_L = 288;
-    localparam D3_X_R = 319;
-    localparam D3_Y_T = 192;
-    localparam D3_Y_B = 256;
+    // DIGIT3 Digit section = 64 x 128
+    localparam D1_X_L = 352;
+    localparam D1_X_R = 415;
+    localparam D1_Y_T = 176;
+    localparam D1_Y_B = 303;
     
-    // NEG section = 32 x 64
-    localparam N_X_L = 320;
-    localparam N_X_R = 351;
-    localparam N_Y_T = 192;
-    localparam N_Y_B = 256;
+    // NEG section = 64 x 128
+    localparam D0_X_L = 416;
+    localparam D0_X_R = 479;
+    localparam D0_Y_T = 176;
+    localparam D0_Y_B = 303;
     
     wire D0_on, D1_on, D2_on, D3_on, N_on;
     
@@ -63,24 +63,24 @@ module vga_control(
     
     
     assign char_addr_D0 = {3'b011, D0};
-    assign row_addr_D0 = y[5:2];   // scaling to 32x64
-    assign bit_addr_D0 = x[4:2];   // scaling to 32x64
+    assign row_addr_D0 = y[6:3];   // scaling to 64 x 128
+    assign bit_addr_D0 = x[5:3];   // scaling to 64 x 128
     
     assign char_addr_D1 = {3'b011, D1};
-    assign row_addr_D1 = y[5:2];   // scaling to 32x64
-    assign bit_addr_D1 = x[4:2];   // scaling to 32x64
+    assign row_addr_D1 = y[6:3];   // scaling to 64 x 128
+    assign bit_addr_D1 = x[5:3];   // scaling to 64 x 128
     
     assign char_addr_D2 = {3'b011, D2};
-    assign row_addr_D2 = y[5:2];   // scaling to 32x64
-    assign bit_addr_D2 = x[4:2];   // scaling to 32x64
+    assign row_addr_D2 = y[6:3];   // scaling to 64 x 128
+    assign bit_addr_D2 = x[5:3];   // scaling to 64 x 128
     
     assign char_addr_D3 = {3'b011, D3};
-    assign row_addr_D3 = y[5:2];   // scaling to 32x64
-    assign bit_addr_D3 = x[4:2];   // scaling to 32x64
+    assign row_addr_D3 = y[6:3];   // scaling to 64 x 128
+    assign bit_addr_D3 = x[5:3];   // scaling to 64 x 128
     
     assign char_addr_N = 7'h3a;
-    assign row_addr_N = y[5:2];    // scaling to 32x64
-    assign bit_addr_N = x[4:2];    // scaling to 32x64
+    assign row_addr_N = y[6:3];    // scaling to 64 x 128
+    assign bit_addr_N = x[5:3];    // scaling to 64 x 128
     
     // Instantiate digit rom
     digits_rom cdr(.clk(clk), .addr(rom_addr), .data(digit_word));
