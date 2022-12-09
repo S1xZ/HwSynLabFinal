@@ -20,34 +20,34 @@ module vga_control(
     //DIGIT0=RIGHTMOSTDIGIT
     
     // DIGIT0 Digit section = 64 x 128
-    localparam N_X_L = 160;
-    localparam N_X_R = 223;
-    localparam N_Y_T = 176;
-    localparam N_Y_B = 303;
+    localparam N_X_L = 128;
+    localparam N_X_R = 191;
+    localparam N_Y_T = 128;
+    localparam N_Y_B = 255;
     
     // DIGIT1 Digit section = 64 x 128
-    localparam D3_X_L = 224;
-    localparam D3_X_R = 287;
-    localparam D3_Y_T = 176;
-    localparam D3_Y_B = 303;
+    localparam D3_X_L = 192;
+    localparam D3_X_R = 255;
+    localparam D3_Y_T = 128;
+    localparam D3_Y_B = 255;
     
     // DIGIT2 Digit section = 64 x 128
-    localparam D2_X_L = 288;
-    localparam D2_X_R = 351;
-    localparam D2_Y_T = 176;
-    localparam D2_Y_B = 303;
+    localparam D2_X_L = 256;
+    localparam D2_X_R = 319;
+    localparam D2_Y_T = 128;
+    localparam D2_Y_B = 255;
     
     // DIGIT3 Digit section = 64 x 128
-    localparam D1_X_L = 352;
-    localparam D1_X_R = 415;
-    localparam D1_Y_T = 176;
-    localparam D1_Y_B = 303;
+    localparam D1_X_L = 320;
+    localparam D1_X_R = 383;
+    localparam D1_Y_T = 128;
+    localparam D1_Y_B = 255;
     
     // NEG section = 64 x 128
-    localparam D0_X_L = 416;
-    localparam D0_X_R = 479;
-    localparam D0_Y_T = 176;
-    localparam D0_Y_B = 303;
+    localparam D0_X_L = 384;
+    localparam D0_X_R = 447;
+    localparam D0_Y_T = 128;
+    localparam D0_Y_B = 255;
     
     wire D0_on, D1_on, D2_on, D3_on, N_on;
     
@@ -114,56 +114,56 @@ module vga_control(
             row_addr = row_addr_D0;
             bit_addr = bit_addr_D0;
             if(digit_bit)
-                rgb = current_rgb;     // cycle rgb
+                rgb = {4'hE,D0,D1};     // cycle rgb
         end
         else if (D0_on&isNan) begin
             char_addr = 7'h3c;
             row_addr = row_addr_D0;
             bit_addr = bit_addr_D0;
             if(digit_bit)
-                rgb = current_rgb;     // cycle rgb
+                rgb = {4'hE,D0,D1};     // cycle rgb
         end
         else if(D1_on&&!isNan) begin
             char_addr = char_addr_D1;
             row_addr = row_addr_D1;
             bit_addr = bit_addr_D1;
             if(digit_bit)
-                rgb = current_rgb;     // cycle rgb
+                rgb = {4'hE,D0,D1};     // cycle rgb
         end
         else if(D1_on&&isNan) begin
             char_addr = 7'h3b;
             row_addr = row_addr_D1;
             bit_addr = bit_addr_D1;
             if(digit_bit)
-                rgb = current_rgb;     // cycle rgb
+                rgb = {4'hE,D0,D1};     // cycle rgb
         end
         else if(D2_on&&!isNan) begin
             char_addr = char_addr_D2;
             row_addr = row_addr_D2;
             bit_addr = bit_addr_D2;
             if(digit_bit)
-                rgb = current_rgb;     // cycle rgb
+                rgb = {4'hE,D0,D1};     // cycle rgb
         end
         else if(D2_on&&isNan) begin
             char_addr = 7'h3c;
             row_addr = row_addr_D2;
             bit_addr = bit_addr_D2;
             if(digit_bit)
-                rgb = current_rgb;     // cycle rgb
+                rgb = {4'hE,D0,D1};   // cycle rgb
         end
         else if(D3_on&&!isNan) begin
             char_addr = char_addr_D3;
             row_addr = row_addr_D3;
             bit_addr = bit_addr_D3;
             if(digit_bit)
-                rgb = current_rgb;     // cycle rgb
+                rgb = {4'hE,D0,D1};    // cycle rgb
         end
         else if(N_on&&!isNan) begin
             char_addr = char_addr_N;
             row_addr = row_addr_N;
             bit_addr = bit_addr_N;
             if(digit_bit)
-                rgb = current_rgb;     // cycle rgb
+                rgb = {4'hE,D0,D1};    // cycle rgb
         end
         
         
@@ -171,6 +171,6 @@ module vga_control(
     
     // ROM Interface    
     assign rom_addr = {char_addr, row_addr};
-    assign digit_bit = digit_word[~bit_addr];    
-                          
+    assign digit_bit = digit_word[~bit_addr];
+    
 endmodule

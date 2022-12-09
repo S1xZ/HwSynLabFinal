@@ -3,7 +3,7 @@
 <!--                                                         -->
 <!-- Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.   -->
 
-<Project Version="7" Minor="61" Path="C:/Users/6/workspace/vivado/HwSynLabFinal/FinalProject.xpr">
+<Project Version="7" Minor="61" Path="C:/Users/mario/workspace/vivadoLab/HwSynLabFinal/FinalProject.xpr">
   <DefaultLaunch Dir="$PRUNDIR"/>
   <Configuration>
     <Option Name="Id" Val="790655105d2f49e2b7bbfd30bcd80ec3"/>

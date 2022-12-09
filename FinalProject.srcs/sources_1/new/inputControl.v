@@ -31,6 +31,8 @@ module inputControl(
     reg [1:0]state=0;
     reg [2:0] rcd;  
     reg [2:0] rsd;
+    reg [2:0] pos=0;
+    reg [3:0] A0,A1,A2,A3,B0,B1,B2,B3;
     reg [15:0]A_reg,B_reg=0;
     reg [1:0]opcode_reg=0;
     
@@ -44,6 +46,11 @@ module inputControl(
         state<=0;
         A_reg<=0;
         B_reg<=0;
+        pos<=0;
+        D0<=0;
+        D1<=0;
+        D2<=0;
+        D3<=0;
         opcode_reg<=0;
         end
         
@@ -62,7 +69,10 @@ module inputControl(
 
             //1
             8'h31: 
-            if(state==2'b00&&A_reg+1<=9999) A_reg<=A_reg+1;
+            if(state==2'b00&&pos==0)A0<=1;
+            else if (state==2'b00&&pos==1)A1<=1;
+            else if (state==2'b00&&pos==2)A2<=1;
+            else if (state==2'b00&&pos==3)A3<=1;
             else if (state==2'b10&&B_reg+1<=9999) B_reg<=B_reg+1;
             
             //2
