@@ -47,12 +47,18 @@ module inputControl(
         A_reg<=0;
         B_reg<=0;
         pos<=0;
-        D0<=0;
-        D1<=0;
-        D2<=0;
-        D3<=0;
+        A0<=0;
+        A1<=0;
+        A2<=0;
+        A3<=0;
+        
+        B0<=0;
+        B1<=0;
+        B2<=0;
+        B3<=0;
         opcode_reg<=0;
         end
+        
         
         if(rcd[1] & ~rcd[2]) begin //Rise edge of received
         case(data)
@@ -66,33 +72,129 @@ module inputControl(
 //              8'h37: begin A_reg<=7000;B_reg<=20;  executed=0; end
 //              8'h38: begin A_reg<=8000;B_reg<=10;  executed=0; end
 //              8'h39: begin A_reg<=9000;B_reg<=0;  executed=0; end
-
+            //0
+            8'h30: 
+            if(state==2'b00&&pos==0)begin A0<=0; pos<=pos+1; end
+            else if (state==2'b00&&pos==1) begin A1<=0; pos<=pos+1; end
+            else if (state==2'b00&&pos==2) begin A2<=0; pos<=pos+1; end
+            else if (state==2'b00&&pos==3) begin A3<=0; pos<=0; end
+            
+            else if(state==2'b10&&pos==0) begin B0<=0; pos<=pos+1; end
+            else if (state==2'b10&&pos==1) begin B1<=0; pos<=pos+1; end
+            else if (state==2'b10&&pos==2) begin B2<=0; pos<=pos+1; end
+            else if (state==2'b10&&pos==3) begin B3<=0; pos<=0; end
+            
             //1
-            8'h31: 
-            if(state==2'b00&&pos==0)A0<=1;
-            else if (state==2'b00&&pos==1)A1<=1;
-            else if (state==2'b00&&pos==2)A2<=1;
-            else if (state==2'b00&&pos==3)A3<=1;
-            else if (state==2'b10&&B_reg+1<=9999) B_reg<=B_reg+1;
+            8'h31:
+            if(state==2'b00&&pos==0)begin A0<=1; pos<=pos+1; end
+            else if (state==2'b00&&pos==1) begin A1<=1; pos<=pos+1; end
+            else if (state==2'b00&&pos==2) begin A2<=1; pos<=pos+1; end
+            else if (state==2'b00&&pos==3) begin A3<=1; pos<=0; end
+            
+            else if(state==2'b10&&pos==0) begin B0<=1; pos<=pos+1; end
+            else if (state==2'b10&&pos==1) begin B1<=1; pos<=pos+1; end
+            else if (state==2'b10&&pos==2) begin B2<=1; pos<=pos+1; end
+            else if (state==2'b10&&pos==3) begin B3<=1; pos<=0; end
             
             //2
-            8'h32: 
-            if(state==2'b00&&A_reg+10<=9999) A_reg<=A_reg+10;
-            else if (state==2'b10&&B_reg+10<=9999) B_reg<=B_reg+10;
+            8'h32:
+            if(state==2'b00&&pos==0)begin A0<=2; pos<=pos+1; end
+            else if (state==2'b00&&pos==1) begin A1<=2; pos<=pos+1; end
+            else if (state==2'b00&&pos==2) begin A2<=2; pos<=pos+1; end
+            else if (state==2'b00&&pos==3) begin A3<=2; pos<=0; end
             
-            //3
+            else if(state==2'b10&&pos==0) begin B0<=2; pos<=pos+1; end
+            else if (state==2'b10&&pos==1) begin B1<=2; pos<=pos+1; end
+            else if (state==2'b10&&pos==2) begin B2<=2; pos<=pos+1; end
+            else if (state==2'b10&&pos==3) begin B3<=2; pos<=0; end
+            
+//          //3
             8'h33:
-            if(state==2'b00&&A_reg+100<=9999) A_reg<=A_reg+100;
-            else if (state==2'b10&&B_reg+100<=9999) B_reg<=B_reg+100;
+            if(state==2'b00&&pos==0)begin A0<=3; pos<=pos+1; end
+            else if (state==2'b00&&pos==1) begin A1<=3; pos<=pos+1; end
+            else if (state==2'b00&&pos==2) begin A2<=3; pos<=pos+1; end
+            else if (state==2'b00&&pos==3) begin A3<=3; pos<=0; end
+            
+            else if(state==2'b10&&pos==0) begin B0<=3; pos<=pos+1; end
+            else if (state==2'b10&&pos==1) begin B1<=3; pos<=pos+1; end
+            else if (state==2'b10&&pos==2) begin B2<=3; pos<=pos+1; end
+            else if (state==2'b10&&pos==3) begin B3<=3; pos<=0; end
             
             //4
             8'h34:
-            if(state==2'b00&&A_reg+1000<=9999) A_reg<=A_reg+1000;
-            else if (state==2'b10&&B_reg+1000<=9999) B_reg<=B_reg+1000;
+            if(state==2'b00&&pos==0)begin A0<=4; pos<=pos+1; end
+            else if (state==2'b00&&pos==1) begin A1<=4; pos<=pos+1; end
+            else if (state==2'b00&&pos==2) begin A2<=4; pos<=pos+1; end
+            else if (state==2'b00&&pos==3) begin A3<=4; pos<=0; end
+            
+            else if(state==2'b10&&pos==0) begin B0<=4; pos<=pos+1; end
+            else if (state==2'b10&&pos==1) begin B1<=4; pos<=pos+1; end
+            else if (state==2'b10&&pos==2) begin B2<=4; pos<=pos+1; end
+            else if (state==2'b10&&pos==3) begin B3<=4; pos<=0; end
+            
+            //5
+            8'h35:
+            if(state==2'b00&&pos==0)begin A0<=5; pos<=pos+1; end
+            else if (state==2'b00&&pos==1) begin A1<=5; pos<=pos+1; end
+            else if (state==2'b00&&pos==2) begin A2<=5; pos<=pos+1; end
+            else if (state==2'b00&&pos==3) begin A3<=5; pos<=0; end
+            
+            else if(state==2'b10&&pos==0) begin B0<=5; pos<=pos+1; end
+            else if (state==2'b10&&pos==1) begin B1<=5; pos<=pos+1; end
+            else if (state==2'b10&&pos==2) begin B2<=5; pos<=pos+1; end
+            else if (state==2'b10&&pos==3) begin B3<=5; pos<=0; end
+            
+            //6
+            8'h36:
+            if(state==2'b00&&pos==0)begin A0<=6; pos<=pos+1; end
+            else if (state==2'b00&&pos==1) begin A1<=6; pos<=pos+1; end
+            else if (state==2'b00&&pos==2) begin A2<=6; pos<=pos+1; end
+            else if (state==2'b00&&pos==3) begin A3<=6; pos<=0; end
+            
+            else if(state==2'b10&&pos==0) begin B0<=6; pos<=pos+1; end
+            else if (state==2'b10&&pos==1) begin B1<=6; pos<=pos+1; end
+            else if (state==2'b10&&pos==2) begin B2<=6; pos<=pos+1; end
+            else if (state==2'b10&&pos==3) begin B3<=6; pos<=0; end
+            
+            //7
+            8'h37:
+            if(state==2'b00&&pos==0)begin A0<=7; pos<=pos+1; end
+            else if (state==2'b00&&pos==1) begin A1<=7; pos<=pos+1; end
+            else if (state==2'b00&&pos==2) begin A2<=7; pos<=pos+1; end
+            else if (state==2'b00&&pos==3) begin A3<=7; pos<=0; end
+            
+            else if(state==2'b10&&pos==0) begin B0<=7; pos<=pos+1; end
+            else if (state==2'b10&&pos==1) begin B1<=7; pos<=pos+1; end
+            else if (state==2'b10&&pos==2) begin B2<=7; pos<=pos+1; end
+            else if (state==2'b10&&pos==3) begin B3<=7; pos<=0; end
+            
+            //8
+            8'h38:
+            if(state==2'b00&&pos==0)begin A0<=8; pos<=pos+1; end
+            else if (state==2'b00&&pos==1) begin A1<=8; pos<=pos+1; end
+            else if (state==2'b00&&pos==2) begin A2<=8; pos<=pos+1; end
+            else if (state==2'b00&&pos==3) begin A3<=8; pos<=0; end
+            
+            else if(state==2'b10&&pos==0) begin B0<=8; pos<=pos+1; end
+            else if (state==2'b10&&pos==1) begin B1<=8; pos<=pos+1; end
+            else if (state==2'b10&&pos==2) begin B2<=8; pos<=pos+1; end
+            else if (state==2'b10&&pos==3) begin B3<=8; pos<=0; end
+            
+            //9
+            8'h39:
+            if(state==2'b00&&pos==0)begin A0<=9; pos<=pos+1; end
+            else if (state==2'b00&&pos==1) begin A1<=9; pos<=pos+1; end
+            else if (state==2'b00&&pos==2) begin A2<=9; pos<=pos+1; end
+            else if (state==2'b00&&pos==3) begin A3<=9; pos<=0; end
+            
+            else if(state==2'b10&&pos==0) begin B0<=9; pos<=pos+1; end
+            else if (state==2'b10&&pos==1) begin B1<=9; pos<=pos+1; end
+            else if (state==2'b10&&pos==2) begin B2<=9; pos<=pos+1; end
+            else if (state==2'b10&&pos==3) begin B3<=9; pos<=0; end
             
             //SPACE
             8'h20:
-            if(state!=2'b11) state<=state+1;
+            if(state!=2'b11)begin state<=state+1; pos<=0; end
             
             
             //+
@@ -118,8 +220,8 @@ module inputControl(
             end
     end
     
-    assign A = A_reg;
-    assign B = B_reg;
+    assign A = A0+10*A1+100*A2+1000*A3;
+    assign B = B0+10*B1+100*B2+1000*B3;
     assign opcode = opcode_reg;
     assign st = state;
     
