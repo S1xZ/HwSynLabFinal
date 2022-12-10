@@ -49,7 +49,7 @@ module top(
     // Clock
     wire targetClk;
     
-    clockGenerator(clk,targetClk);
+    clockGenerator clockGenerator(clk,targetClk);
     
     ////////////////////////////////////////
     // Display
