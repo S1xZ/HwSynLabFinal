@@ -1,5 +1,5 @@
 # System Schematic
-![[https://github.com/S1xZ/HwSynLabFinal/blob/main/doc/Pasted%20image%2020221210155917.png?raw=true]]
+![](https://raw.githubusercontent.com/S1xZ/HwSynLabFinal/main/doc/Pasted%20image%2020221210155917.png)
 
 # Input of system
 ---
